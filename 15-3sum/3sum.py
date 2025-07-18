@@ -28,6 +28,6 @@ class Solution(object):
                         right -= 1
                     
                     left += 1
-                   
+                    right -= 1
                     
         return ans
