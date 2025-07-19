@@ -2,7 +2,7 @@ class Solution(object):
     def threeSum(self, nums):
         """
         :type nums: List[int]
-        :rtype: List[List[int]]
+        :rtype: List[List[int]] 
         """
         nums.sort()  # ✅ Missing Step
         ans = []
