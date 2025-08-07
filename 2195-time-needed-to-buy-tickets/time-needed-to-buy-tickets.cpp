@@ -6,7 +6,7 @@ public:
         int min = 0;
 
         while(!tickets.empty()){
-            cout << tickets.front() << " ";
+            
             if (k == 0 && tickets.front() == 1)
                 return min + 1;
             else if (tickets.front() == 1 ){
