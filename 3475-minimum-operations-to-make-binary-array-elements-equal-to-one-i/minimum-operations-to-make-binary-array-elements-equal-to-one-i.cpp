@@ -12,15 +12,11 @@ public:
             }
         }
 
-        bool check = true;
-
         for (auto& num : nums){
-            if (num == 0){
-                check = false;
-                break;
-            }
+            if (num == 0)
+                return -1;
         }
 
-        return check ? count : -1;
+        return count;
     }
 };
