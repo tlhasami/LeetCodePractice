@@ -10,13 +10,12 @@ public:
 
         while (greed < m && size < n){
             if (g[greed] <= s[size]){
-                greed++ , size++;
-                count++;
+                greed++;
             }
-            else
-                size++;
+            
+            size++;
         }
 
-        return count;
+        return greed;
     }
 };
