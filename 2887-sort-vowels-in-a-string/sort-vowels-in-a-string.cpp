@@ -13,6 +13,7 @@ public:
         for(auto& a:s){
             if (isVowel(a)){
                 vowals.push_back(a);
+                a = '*';
             }
         }
 
@@ -20,7 +21,7 @@ public:
 
         int idx = 0;
         for (auto& a:s){
-            if (isVowel(a)){
+            if (a == '*'){
                 a = vowals[idx++];
             }
         }
