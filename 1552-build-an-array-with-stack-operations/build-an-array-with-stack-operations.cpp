@@ -4,17 +4,19 @@ public:
         
         int value = 1;
         vector<string> result;
-        stack<int> st;
+        
         for (int num : target){
             if (value == num){
-                st.push(value++); result.push_back("Push");
+                result.push_back("Push");
+                value++;
             } else {
                 while (value!=num){
-                    st.push(value++); st.pop();
                     result.push_back("Push");
                     result.push_back("Pop");
+                    value++;
                 }
-                st.push(value++); result.push_back("Push");
+                result.push_back("Push");
+                value++;
             }
         }
 
