@@ -11,21 +11,18 @@ public:
                 char alpha = email[i];
 
                 if (alpha == '@'){
-                    idx++;
-                    currentEmail += "@";
+                    idx++;currentEmail += "@";
                 } else if (alpha == '.' && idx == 0){
                     continue;
                 } else if (alpha == '+' && idx == 0){
+
                     while (i+1< n && email[i+1] != '@'){
-                        //currentEmail += email[i+1];
                         i++;
                     }
                 } else {
                     currentEmail += alpha;
                 }
             }
-
-           // cout << currentEmail << endl;
 
             uniqueEmails.insert(currentEmail);
 
