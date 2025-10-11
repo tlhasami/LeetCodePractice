@@ -5,17 +5,17 @@ public:
         if (n % 5 != 0) return -1;
         
         int frogs = 0, ans = 0;
-        unordered_map<char, int> freq;
+        vector<int> freq(26 , 0);
         
         for (char ch : croakOfFrogs) {
-            if (ch == 'c') frogs++, freq['c']++;
-            else if (ch == 'r' && freq['c'] > freq['r']) freq['r']++;
-            else if (ch == 'o' && freq['r'] > freq['o']) freq['o']++;
-            else if (ch == 'a' && freq['o'] > freq['a']) freq['a']++;
-            else if (ch == 'k' && freq['a'] > freq['k']){
+            if (ch == 'c') frogs++, freq['c'-'a']++;
+            else if (ch == 'r' && freq['c'-'a'] > freq['r'-'a']) freq['r'-'a']++;
+            else if (ch == 'o' && freq['r'-'a'] > freq['o'-'a']) freq['o'-'a']++;
+            else if (ch == 'a' && freq['o'-'a'] > freq['a'-'a']) freq['a'-'a']++;
+            else if (ch == 'k' && freq['a'-'a'] > freq['k'-'a']){
                 ans = max(ans, frogs);
                 frogs--;
-                freq['k']++;
+                freq['k'-'a']++;
             }
             else return -1;
         }
