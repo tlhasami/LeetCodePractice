@@ -1,30 +1,20 @@
-#include <iostream>
-#include <vector>
-using namespace std;
-
 class StockSpanner {
 public:
-    vector<int> val;
+    stack<pair<int, int>> st;  // {price, span}
 
     StockSpanner() {}
 
     int next(int price) {
-        val.push_back(price);
-
-        int count = 1;
-        int n = val.size();
-
-        // Go backwards to count consecutive smaller or equal prices
-        for (int i = n - 2; i >= 0; i--) {
-            if (val[i] <= price)
-                count++;
-            else
-                break; // stop when we find a larger price
+        int span = 1;
+        while (!st.empty() && st.top().first <= price) {
+            span += st.top().second;
+            st.pop();
         }
-
-        return count;
+        st.push({price, span});
+        return span;
     }
 };
+
 
 /**
  * Your StockSpanner object will be instantiated and called as such:
