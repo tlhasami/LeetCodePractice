@@ -21,6 +21,43 @@
  */
 class Solution {
 public:
+    ListNode* current;
+    int getCount(ListNode* head){
+        if (!head) return 0;
+
+        int count = 0;
+        while (head){
+            count++;
+            head = head->next;
+        }
+
+        return count;
+    }
+
+    TreeNode* built(int low , int high){
+        if (low > high)
+            return nullptr;
+
+        int mid = low + (high - low) / 2;
+        
+        TreeNode* left = built(low , mid-1);
+        TreeNode* root = new TreeNode(current->val);
+        current = current->next;
+        TreeNode* right = built(mid+1 , high);
+
+        root->left = left;
+        root->right = right;
+
+        return root;
+    }
+
+    TreeNode* sortedListToBST(ListNode* head) {
+        int n = getCount(head);
+        current = head;
+        return built(1,n);
+    }
+
+    /*
     TreeNode* sortedListToBST(ListNode* head) {
         if (!head)
             return nullptr;
@@ -46,4 +83,6 @@ public:
         return root;
 
     }
+
+    */
 };
