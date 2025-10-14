@@ -12,29 +12,28 @@
 class Solution {
 public:
     vector<TreeNode*> generateTrees(int n) {
-        if (n == 0) return {};
-        return build(1 , n);
+        if (n==0) return {};
+        return build(1,n);
     }
 
-    vector<TreeNode*> build(int low, int high){
+    vector<TreeNode*> build(int low , int high){
         vector<TreeNode*>trees;
+
         if (low > high){
             trees.push_back(nullptr);
             return trees;
         }
 
-        for (int val = low ; val <= high ; val++){
+        int mid = low + (high - low)/2 ;
+        for (int i = low ; i <= high ;i++){
+            vector<TreeNode*> leftTrees = build(low, i - 1);
+            vector<TreeNode*> rightTrees = build(i + 1, high);
 
-            vector<TreeNode*> LeftTrees = build(low , val - 1);
-            vector<TreeNode*> RightTrees = build(val + 1 ,high);
-
-            for (auto L : LeftTrees){
-                for (auto R : RightTrees){
-                    TreeNode* root = new TreeNode(val);
-
-                    root->left = L;
-                    root->right = R;
-                    
+            for (auto left : leftTrees){
+                for (auto right : rightTrees){
+                    TreeNode* root = new TreeNode(i);
+                    root->left = left;
+                    root->right = right;
                     trees.push_back(root);
                 }
             }
@@ -42,7 +41,4 @@ public:
 
         return trees;
     }
-
-
-
 };
