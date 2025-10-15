@@ -46,12 +46,9 @@ public:
         if (!root) return 0;
         
         if (root->left && !root->left->left && !root->left->right)
-            sum+=root->left->val;
-        
-        sumOfLeftLeaves(root->left);
-        sumOfLeftLeaves(root->right);
+            return root->left->val + sumOfLeftLeaves(root->left) + sumOfLeftLeaves(root->right);
 
-        return sum;
+        return sumOfLeftLeaves(root->left) + sumOfLeftLeaves(root->right);
 
     }
 };
