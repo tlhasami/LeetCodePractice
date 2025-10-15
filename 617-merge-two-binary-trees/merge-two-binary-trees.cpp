@@ -18,7 +18,7 @@ public:
         
         TreeNode* root = new TreeNode(value);
         root->left = mergeTrees(root1 ? root1->left : nullptr , root2 ? root2->left : nullptr);
-        root->right =mergeTrees(root1 ? root1->right : nullptr , root2 ? root2->right : nullptr);
+        root->right= mergeTrees(root1 ? root1->right : nullptr , root2 ? root2->right : nullptr);
 
         return root;
     }
