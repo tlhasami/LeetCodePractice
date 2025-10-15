@@ -13,8 +13,15 @@ class Solution {
 public:
     string tree2str(TreeNode* root) {
         if (!root) return "";
-        string left = "(" + tree2str(root->left) + ")";
-        string right =  "(" + tree2str(root->right) + ")" ;
-        return to_string(root->val) + (left == "()" && right == "()" ? "" : left)  + (right == "()" ? "" : right) ;
+
+        string res = to_string(root->val);
+
+        if (root->left || root->right)
+            res += "(" + tree2str(root->left) + ")";
+        if (root->right)
+            res += "(" + tree2str(root->right) + ")";
+
+        return res;
     }
+
 };
