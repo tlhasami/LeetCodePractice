@@ -27,7 +27,6 @@ public:
 
         while (!q.empty()){
             int size = q.size(); 
-            cout << depth << " ";
             for (int i = 0 ; i < size ; i++){
                 TreeNode* tree = q.front(); 
                 q.pop();
