@@ -9,8 +9,6 @@
  */
 class Codec {
 public:
-
-    /*
     
     // Encodes a tree to a single string.
     string serialize(TreeNode* root) {
@@ -48,8 +46,47 @@ public:
 
     }
 
-    */
+    TreeNode* deserialize(string data) {
+        if (data == "") return nullptr;
 
+        vector<string> nodes;
+        string token;
+        stringstream ss(data);
+        while (getline(ss, token, ',')) {
+            nodes.push_back(token);
+        }
+
+        TreeNode* root = new TreeNode(stoi(nodes[0]));
+        queue<TreeNode*>q;
+        q.push(root);
+
+        int idx = 1 , n = nodes.size();
+        while (idx < n && !q.empty()){
+            int level = q.size();
+
+            for (int i = 0 ; i < level ; i++ ){
+                TreeNode* curr = q.front(); q.pop();
+
+                if (nodes[idx] != "null"){
+                    curr->left = new TreeNode(stoi(nodes[idx]));
+                    q.push(curr->left);
+                }
+
+                idx++;
+
+                if (nodes[idx] != "null"){
+                    curr->right = new TreeNode(stoi(nodes[idx]));
+                    q.push(curr->right);
+                }
+                idx++;
+            }
+            
+        }
+        
+        return root;
+    }
+
+    /*
     string serialize(TreeNode* root) {
         if (!root) return "null";
         return to_string(root->val) +","+ serialize(root->left)+"," + serialize(root->right);
@@ -81,6 +118,7 @@ public:
         int index = 0;
         return buildTree(nodes, index);
     }
+    */
 };
 
 // Your Codec object will be instantiated and called as such:
