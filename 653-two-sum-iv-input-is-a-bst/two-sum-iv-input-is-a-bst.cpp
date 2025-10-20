@@ -23,14 +23,24 @@ public:
         vector<int>values;
         inorder(root,values);
 
-        unordered_map<int,int>freq;
-        for (int& val : values){
-            freq[val]++;
-        }
+        // unordered_map<int,int>freq;
+        // for (int& val : values){
+        //     freq[val]++;
+        // }
 
-        for (int& val : values){
-            if (freq.find(k - val)!=freq.end() && (freq[k-val] > 2 || val != k-val) )
+        // for (int& val : values){
+        //     if (freq.find(k - val)!=freq.end() && (freq[k-val] > 2 || val != k-val) )
+        //         return true;
+        // }
+        int left = 0, right = values.size()-1;
+        while(left<right){
+            if(values[left]+values[right] == k){
                 return true;
+            }else if(values[left]+values[right] > k){
+                right--;
+            } else{
+                left++;
+            }
         }
 
         return false;
