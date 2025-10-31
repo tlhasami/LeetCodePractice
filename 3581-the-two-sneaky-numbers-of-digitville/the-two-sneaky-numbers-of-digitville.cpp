@@ -1,16 +1,16 @@
 class Solution {
 public:
     vector<int> getSneakyNumbers(vector<int>& nums) {
-        unordered_map<int,int> freq;
-        vector<int>result;
-
-        for (int& num:nums){
+        unordered_map<int,int>freq;
+        for (int& num: nums){
             freq[num]++;
-            if (freq[num] == 2)
-                result.push_back(num);
+        }
+
+        vector<int>result;
+        for (auto &[key,val] : freq){
+            if (val > 1) result.push_back(key);
         }
 
         return result;
-
     }
 };
