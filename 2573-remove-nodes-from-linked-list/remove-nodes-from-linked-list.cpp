@@ -22,10 +22,32 @@ public:
 
         return prev;
     }
+
     ListNode* removeNodes(ListNode* head) {
+        stack<ListNode*>st;
+        ListNode* temp = head;
+
+        while (temp){
+            while(!st.empty() && st.top()->val < temp->val){
+                st.pop();
+            }
+
+            st.push(temp);
+            temp = temp->next;
+        }
+
+        ListNode* newList = nullptr;
+        while (!st.empty()){
+            ListNode* toAdd = st.top(); st.pop();
+            toAdd->next = newList;
+            newList = toAdd;
+        }
+
+        return newList;
+
+        /*
         head = reverse(head);
 
-        stack<int>st;
         int currMax = head->val;
         ListNode* temp = head;
         while(temp->next){
@@ -37,22 +59,11 @@ public:
                 temp = temp->next;
             }
                 
-                
-            // while(!st.empty() && st.top() < temp->next->val){
-            //     st.pop();
-            //     st.push(temp->next->val);
-            // }
-
-
-            // if (st.top() > temp->next->val){
-            //     temp->next = temp->next->next;
-            //     continue;
-            // }
-
-            //temp = temp->next;
+            
         }
 
         head = reverse(head);
         return head;
+        */
     }
 };
