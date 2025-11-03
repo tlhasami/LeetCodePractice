@@ -1,7 +1,31 @@
 class Solution {
 public:
     int minCost(string colors, vector<int>& neededTime) {
-        int timeCost = 0 , n = colors.length();
+        int i = 0 , j = 1 , timeCost = 0 , n = colors.length(); 
+
+        while (i < n && j< n){
+            if (colors[i]==colors[j]){
+                if (neededTime[i] < neededTime[j]){
+                    timeCost += neededTime[i];
+                    i=j;
+                    j++;
+                } else {
+                    timeCost += neededTime[j];
+                    j++;
+                }
+            } else {
+                i=j;
+                j++;
+            }
+        }
+
+        return timeCost;
+        
+    }
+};
+
+/*
+int timeCost = 0 , n = colors.length();
         stack<pair<char,int>>st;
         for (int i = 0 ; i < n ; i++){
             if (!st.empty() && st.top().first==colors[i]){
@@ -24,5 +48,4 @@ public:
         }
         
         return timeCost;
-    }
-};
+*/
