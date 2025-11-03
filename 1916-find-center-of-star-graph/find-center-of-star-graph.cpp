@@ -11,7 +11,6 @@ public:
         }
 
         for (auto& [key,value] : freq){
-            cout << value << " ";
             if (value == n) return key;
         }
             
