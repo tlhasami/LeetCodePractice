@@ -5,7 +5,7 @@ public:
         stack<pair<char,int>>st;
         for (int i = 0 ; i < n ; i++){
             if (!st.empty() && st.top().first==colors[i]){
-                cout << "same " << st.top().first <<st.top().second << " - " << colors[i]<<neededTime[i] << " ";
+                //cout << "same " << st.top().first <<st.top().second << " - " << colors[i]<<neededTime[i] << " ";
                 if (st.top().second > neededTime[i] ){
                     timeCost += neededTime[i] ;
                     continue;
@@ -15,7 +15,7 @@ public:
                     st.push({colors[i],neededTime[i]});
                 }
 
-                cout << timeCost << " " << endl;
+                //cout << timeCost << " " << endl;
             } 
             
             st.push({colors[i],neededTime[i]});
