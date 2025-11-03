@@ -1,19 +1,22 @@
 class Solution {
 public:
     int findCenter(vector<vector<int>>& edges) {
+
+        int n = edges.size() ;
         unordered_map<int,int>freq;
 
-        for(auto& edge:edges){
+        for (auto& edge : edges){
             freq[edge[0]]++;
             freq[edge[1]]++;
         }
 
-        auto max_pair = max_element(freq.begin(), freq.end(),[]
-        (const auto &a, const auto &b) {
-            return a.second < b.second; // Compare by value
+        for (auto& [key,value] : freq){
+            cout << value << " ";
+            if (value == n) return key;
         }
-    );
+            
+        
 
-        return max_pair->first;
+        return -1;
     }
 };
