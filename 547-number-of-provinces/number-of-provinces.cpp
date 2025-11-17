@@ -38,16 +38,17 @@ public:
             }
         }
 
-        for (auto& l :list){
-            for (auto& a : l){
-                cout << a << " ";
-            } cout << endl;
-        }
+        // for (auto& l :list){
+        //     for (auto& a : l){
+        //         cout << a << " ";
+        //     } cout << endl;
+        // }
 
 
 
         vector<bool>visited(n,false);
         int count = 0;
+        
         for (int i = 0 ; i < n ; i++){
 
             if (!visited[i])
