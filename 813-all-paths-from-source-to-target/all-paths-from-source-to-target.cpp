@@ -23,7 +23,32 @@ public:
         vector<vector<int>>result;
         vector<bool>visited( graph.size() , false);
         vector<int>path;
-        dfs(graph,result,path, visited,graph.size()-1 , 0);
+        //dfs(graph,result,path, visited,graph.size()-1 , 0);
+
+        queue<vector<int>>qu;
+
+        qu.push({0});
+
+        int n = graph.size();
+
+        while(!qu.empty()){
+            vector<int> top = qu.front() ; qu.pop();
+
+            int idx = top.back();
+
+            if (idx == n -1) {
+                result.push_back(top);
+                continue;
+            }
+
+            for (int& edge : graph[idx]){
+                if(!visited[edge]){
+                    top.push_back(edge);
+                    qu.push(top) ;
+                    top.pop_back();
+                }
+            }
+        }
 
         return result;
         
