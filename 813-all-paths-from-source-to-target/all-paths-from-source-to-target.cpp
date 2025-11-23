@@ -9,7 +9,7 @@ public:
         if (idx == n){
             result.push_back(path);
         }
-
+        else
         for (int& edge : graph[idx] )
             if (!visited[edge]) 
                 dfs(graph ,result,path,visited,n,edge);
