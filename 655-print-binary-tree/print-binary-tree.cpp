@@ -11,45 +11,23 @@
  */
 class Solution {
 public:
-    /*
-    vector<vector<string>> result;
-    void place(TreeNode* root , int r  , int start , int end){
-        if (!root) return ;
+    int getheight(TreeNode * root){
+        if(!root) return 0;
 
-        int mid = start + (end - start)/2;
-        cout << start << " " << end << " " << mid << endl;
-        result[r][mid] = to_string(root->val);
-
-        place(root->left , r+1 , start , mid-1 );
-        place(root->right , r+1 ,mid+1 , end );
+        return 1 + max(getheight(root -> left), getheight(root -> right));
     }
-    */
-
-    int getHeight(TreeNode* root){
-        if (!root) return 0;
-        return 1 + max(getHeight(root->left) ,getHeight(root->right) );
+    void solve(TreeNode * root, vector<vector<string>>&ans,int row,int left,int right){
+        if(!root || left > right) return;
+        int mid = (left + right)/2;
+        ans[row][mid] = to_string(root -> val);
+        solve(root -> left, ans, row + 1, left, mid -1);
+        solve(root -> right, ans, row + 1, mid + 1, right);
     }
-
-    vector<vector<string>> result;
-    void place(TreeNode* root , int r  , int c ,const int& height){
-        if (!root) return ;
-        result[r][c] = to_string(root->val);
-        if (r+1 == result.size()) return ;
-
-        place(root->left , r+1 , c - pow(2,height-r-2) , height);
-        place(root->right , r+1 , c + pow(2,height-r-2) , height );
-    }
-
     vector<vector<string>> printTree(TreeNode* root) {
-        int height = getHeight(root);
-        int width = pow(2 , height) - 1;
-
-        cout << height << " " << width << endl;
-
-        result = vector<vector<string>>(height , vector<string>(width , ""));
-        place(root,0,(width-1)/2,height);
-
-        return result;
-
+        int h = getheight(root);
+        int w = ( 1 << h) -1; // this we are doing to find number of columns
+        vector<vector<string>> ans(h, vector<string>(w,""));
+        solve(root , ans, 0 , 0, w-1);
+        return ans;
     }
 };
