@@ -43,17 +43,24 @@ public:
         return binaryToNumber(grey);
     }
 
+    // vector<int> grayCode(int n) {
+    //     vector<int>result;
+    //     int maxRange = 1<<(n) ;
+    //     --maxRange;
+    //     //cout << "GAME : " << maxRange << endl;
+
+    //     for (int i = 0 ; i <= maxRange ; i++){
+    //         //cout << i << " " << getGreyCode(i) << endl;
+    //         result.push_back(getGreyCode(i));
+    //     }
+
+    //     return result;
+    // }
+
     vector<int> grayCode(int n) {
-        vector<int>result;
-        int maxRange = 1<<(n) ;
-        --maxRange;
-        //cout << "GAME : " << maxRange << endl;
-
-        for (int i = 0 ; i <= maxRange ; i++){
-            //cout << i << " " << getGreyCode(i) << endl;
-            result.push_back(getGreyCode(i));
-        }
-
-        return result;
+        int total = 1 << n;
+        vector<int> res(total);
+        for (int i = 0; i < total; i++) res[i] = (i ^ (i >> 1));
+        return res;
     }
 };
