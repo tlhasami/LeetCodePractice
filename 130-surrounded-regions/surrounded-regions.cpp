@@ -1,44 +1,46 @@
 class Solution {
 public:
-    int dx[4] = {-1, 1, 0, 0}; // up, down
-    int dy[4] = {0, 0, -1, 1}; // left, right
 
-    void dfs(vector<vector<char>>& grid, int n, int m, int row, int col) {
-        // Boundary and condition check
-        if (row < 0 || row >= n || col < 0 || col >= m || grid[row][col] != 'O')
-            return;
+    int dx[4] = {-1, 0, 1, 0};
+    int dy[4] = {0, 1, 0, -1};
 
-        grid[row][col] = 'S'; // Temporarily mark safe
+    void dfs(vector<vector<char>>& board, int r, int c, int n, int m) {
+        board[r][c] = 'S';
 
         for (int i = 0; i < 4; i++) {
-            dfs(grid, n, m, row + dx[i], col + dy[i]);
+            int row = r + dx[i];
+            int col = c + dy[i];
+
+            if (row < 0 || col < 0 || row >= n || col >= m || board[row][col] != 'O')
+                continue;
+
+            dfs(board, row, col, n, m);
         }
     }
 
-    void solve(vector<vector<char>>& grid) {
-        int n = grid.size();
-        if (n == 0) return;
-        int m = grid[0].size();
 
-        // Run DFS from all 'O's on the border
+    void solve(vector<vector<char>>& board) {
+        int n = board.size() , m = board[0].size();
+
         for (int i = 0; i < n; i++) {
-            dfs(grid, n, m, i, 0);         // left border
-            dfs(grid, n, m, i, m - 1);     // right border
+            if (board[i][0] == 'O')     dfs(board, i, 0, n, m);
+            if (board[i][m-1] == 'O')   dfs(board, i, m-1, n, m);
         }
 
-        for (int j = 0; j < m; j++) {
-            dfs(grid, n, m, 0, j);         // top border
-            dfs(grid, n, m, n - 1, j);     // bottom border
+        for (int i = 0; i < m; i++) {
+            if (board[0][i] == 'O')     dfs(board, 0, i, n, m);
+            if (board[n-1][i] == 'O')   dfs(board, n-1, i, n, m);
         }
 
-        // Final processing: flip and restore
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (grid[i][j] == 'S')
-                    grid[i][j] = 'O'; // restore safe
-                else if (grid[i][j] == 'O')
-                    grid[i][j] = 'X'; // surrounded
+
+        for (auto& line : board){
+            for (auto& val : line){
+                if (val == 'S')
+                    val = 'O';
+                else 
+                    val = 'X';
             }
         }
+
     }
 };
