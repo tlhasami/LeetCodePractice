@@ -1,6 +1,37 @@
 class Solution {
 public:
+    bool dfs(vector<vector<int>>& graph,vector<int>&visited , int node ){
+        if (visited[node] == 1)
+            return false;
+        if (visited[node] == 2)
+            return true;
+
+        visited[node] = 1;
+        for (int& v : graph[node]){
+            if (!dfs(graph,visited,v))
+                return false;
+        }
+
+        visited[node] = 2;
+        return true;
+    }
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        int numberOfNodes = graph.size();
+
+        vector<int>result;
+        vector<int>visited(numberOfNodes,0);
+
+        for (int i = 0 ; i < numberOfNodes ; i++){
+            if (dfs(graph,visited,i))
+                result.push_back(i);
+        }
+
+        return result;
+       
+    }
+};
+
+/*
 
         int numberOfNodes = graph.size();
         vector<vector<int>>inversedGraph(numberOfNodes);
@@ -45,5 +76,5 @@ public:
         return safeNodes;
 
 
-    }
-};
+
+*/
