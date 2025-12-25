@@ -19,19 +19,18 @@ public:
         }
 
         while (!qu.empty()){
-            auto temp = qu.front();
+            auto [r,c] = qu.front();
             qu.pop();
 
             for (int i = 0 ; i < 4 ; i++){
-                int row = temp.first + dx[i];
-                int col = temp.second + dy[i];
+                int row = r + dx[i];
+                int col = c + dy[i];
 
                 if (row < 0 || col < 0 || row >= n || col >= m)
                     continue;
 
-                
-                if (mat[row][col] > mat[temp.first][temp.second]+1){
-                    mat[row][col] = mat[temp.first][temp.second]+1;
+                if ( mat[row][col] == INT_MAX){
+                    mat[row][col] = mat[r][c]+1; 
                     qu.push({row,col});
                 }
                     
