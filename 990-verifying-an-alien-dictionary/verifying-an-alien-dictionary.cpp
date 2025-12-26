@@ -18,12 +18,7 @@ public:
                 if (map[x[j]] < map[y[j]]){
                     found = true;
                     break;
-                }
-                
-                if (map[x[j]] == map[y[j]])
-                    continue;
-
-                if (map[x[j]] > map[y[j]])
+                } else if (map[x[j]] > map[y[j]])
                     return false;
             }
 
