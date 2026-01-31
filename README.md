@@ -22,9 +22,13 @@ question number.
 Example structure:
 
 /1_Two_Sum
+
 /2_Add_Two_Numbers
+
 /3_Longest_Substring_Without_Repeating_Characters
+
 /20_Valid_Parentheses
+
 /206_Reverse_Linked_List
 
 Each folder may contain:
