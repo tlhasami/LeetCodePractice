@@ -11,37 +11,32 @@
  */
 class Solution {
 public:
+    TreeNode* build(vector<int>& values , int left , int right ){
+        if (left > right) return nullptr;
+
+        int mid = (right-left) / 2 + left;
+        // cout << left << " " << mid << " " << right << endl; 
+        TreeNode* root = new TreeNode(values[mid]);
+
+        root->left = build(values, left , mid-1);
+        root->right = build(values, mid+1 , right);
+
+        return root;
+    }
+
     void inorder(TreeNode* root , vector<int>& values){
-        if (!root) return;
+        if (!root) return ;
+
         inorder(root->left, values);
         values.push_back(root->val);
         inorder(root->right, values);
     }
 
-    int count(TreeNode* root){
-        if (!root) return 0;
-        return 1 + count(root->left) + count(root->right);
-    }
-
-    TreeNode* make(vector<int>& values , int low, int high){
-        if (low > high) return nullptr;
-
-        int mid = low + (high-low)/2;
-
-        TreeNode* root = new TreeNode(values[mid]);
-        root->left = make(values,low, mid-1);
-        root->right = make(values,mid+1, high);
-        
-        return root;
-    }
-
+    
     TreeNode* balanceBST(TreeNode* root) {
-        vector<int>values;
-        values.reserve(count(root));
-        inorder(root,values);
-
-        TreeNode* result = make(values,0,values.size()-1);
-
-        return result;
+        vector<int> values;
+        inorder(root, values);
+        //return nullptr;
+        return build(values , 0 , values.size()-1);
     }
 };
